@@ -1,5 +1,6 @@
-import { Controller, Get, Post } from '@nestjs/common';
-import { IssueCredentialsService } from './issuer.service'
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { IssueCredentialsService } from './issuer.service';
+import { issueCredentialDto } from '../dtos/issue-credential.dto'
 import { ApiTags } from '@nestjs/swagger';
 
 
@@ -10,8 +11,10 @@ import { ApiTags } from '@nestjs/swagger';
 
      @Post('/send-credential')
      @ApiTags('issue-credentials')
-     async connectionCheck(){
-         return this.issueCredentialsService.sendCredential();
+     async issueCredential(
+         @Body() credentialData:issueCredentialDto
+     ){
+         return this.issueCredentialsService.sendCredential(credentialData);
      }
 
     

@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
+
 import { AppController } from './app.controller';
 import {ConnectionController} from './connection/connections.controller';
-import {ConnectionService} from './connection/connections.service';
 import {IssueCredentialsController} from './issuance/issuer.controller';
+import { CredentialDefinitionController } from './credential-definition/credential-definition.controller';
+import { CredentialDefinitionService } from "./credential-definition/credential-definition.service";
+import { SchemaController} from "./schema/schema.controller";
+import { SchemaService } from "./schema/schema.service";
+
+import {ConnectionService} from './connection/connections.service';
 import {IssueCredentialsService} from './issuance/issuer.service';
 import { AppService } from './app.service';
+
+
 import {TypeOrmModule} from '@nestjs/typeorm'
 import{User} from './entities/user.entity'
 import {AuthzController} from './authz/authz.controller'
@@ -33,7 +41,7 @@ import { HttpModule } from '@nestjs/axios';
     ])
 
   ],
-  controllers: [AppController,ConnectionController,AuthzController,IssueCredentialsController],
-  providers: [AppService,ConnectionService,AuthzService,IssueCredentialsService],
+  controllers: [AppController,ConnectionController,AuthzController,IssueCredentialsController,CredentialDefinitionController,SchemaController],
+  providers: [AppService,ConnectionService,AuthzService,IssueCredentialsService,CredentialDefinitionService,SchemaService],
 })
 export class AppModule {}
