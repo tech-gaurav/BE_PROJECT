@@ -14,16 +14,16 @@ import { RecieveInvitationDto} from '../dtos/recieve-invitation.dto'
      @Post('/create-invitation')
      @ApiTags('connections')          //// create connection invitation between issuer ,holder and verifier
      async createConnectionInvitation(
-        @Body() connectionData : ConnectionDto
+        @Body() connectionData
      ){
          return this.connectionService.createConnectionInvitation(connectionData);
      }
 
 
-     @Post('/recieve-invitation')
+     @Post('/receive-invitation')
      @ApiTags('connections')
      async(
-         @Body() invitation:RecieveInvitationDto
+         @Body() invitation
      ){
          return this.connectionService.recieveConnectionInvitation(invitation);
      }
