@@ -13,35 +13,14 @@ import {IssueCredentialsService} from './issuance/issuer.service';
 import { AppService } from './app.service';
 
 
-import {TypeOrmModule} from '@nestjs/typeorm'
-import{User} from './entities/user.entity'
-import {AuthzController} from './authz/authz.controller'
-import {AuthzService} from './authz/authz.service'
-import {UserRepository} from './repositories/user.repository'
-import {AuthzModule} from './authz/authz.module'
+
 import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Gaurav#123',
-      database: 'Verifiable_Cred',
-      entities: [User],
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
-    AuthzModule,
-    HttpModule
-    ,
-    TypeOrmModule.forFeature([
-      UserRepository
-    ])
+       HttpModule
 
   ],
-  controllers: [AppController,ConnectionController,AuthzController,IssueCredentialsController,CredentialDefinitionController,SchemaController],
-  providers: [AppService,ConnectionService,AuthzService,IssueCredentialsService,CredentialDefinitionService,SchemaService],
+  controllers: [AppController,ConnectionController,IssueCredentialsController,CredentialDefinitionController,SchemaController],
+  providers: [AppService,ConnectionService,IssueCredentialsService,CredentialDefinitionService,SchemaService],
 })
 export class AppModule {}
