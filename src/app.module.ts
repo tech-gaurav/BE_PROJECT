@@ -7,11 +7,11 @@ import { CredentialDefinitionController } from './credential-definition/credenti
 import { CredentialDefinitionService } from "./credential-definition/credential-definition.service";
 import { SchemaController} from "./schema/schema.controller";
 import { SchemaService } from "./schema/schema.service";
-
 import {ConnectionService} from './connection/connections.service';
 import {IssueCredentialsService} from './issuance/issuer.service';
 import { AppService } from './app.service';
-
+import{AgentController} from './agent/agent.controller';
+import { AgentService } from "./agent/agent.service";
 
 
 import { HttpModule } from '@nestjs/axios';
@@ -20,7 +20,7 @@ import { HttpModule } from '@nestjs/axios';
        HttpModule
 
   ],
-  controllers: [AppController,ConnectionController,IssueCredentialsController,CredentialDefinitionController,SchemaController],
-  providers: [AppService,ConnectionService,IssueCredentialsService,CredentialDefinitionService,SchemaService],
+  controllers: [AppController,ConnectionController,IssueCredentialsController,CredentialDefinitionController,SchemaController,AgentController],
+  providers: [AppService,ConnectionService,IssueCredentialsService,CredentialDefinitionService,SchemaService,AgentService],
 })
 export class AppModule {}
