@@ -23,11 +23,11 @@ export class ConnectionService {
      // const result: ResponseService = new ResponseService();
       //const platformOrgData = await this.organizationRepository.findOne({ id: 1 });
 
- 
+       console.log("create connection invitation call ....")
        const auto_accept = true;
        //const _public = true;
               const params: object = { auto_accept, multi_use: true };
-              let url: string = `${'http://192.168.43.184:9001'}${'/connections/create-invitation'}`;
+              let url: string = `${process.env.IP}:${process.env.ADMIN_PORT}${'/connections/create-invitation'}`;
               Object.keys(params).forEach((element) => {
                   //this.logger.debug(`params[element] : ${params[element]}`)
                   const append: string = url.includes('?') ? '&' : '?';
@@ -51,7 +51,7 @@ export class ConnectionService {
   }
 
   async recieveConnectionInvitation(invitationData:any){
-    const urlForRecieveInvitations:string =`${'http://192.168.43.184:9002'}${'/connections/receive-invitation'}`
+    const urlForRecieveInvitations:string =`${process.env.IP}:${process.env.ADMIN_PORT}${'/connections/receive-invitation'}`
 
     try{
       return this.httpService.post(urlForRecieveInvitations,invitationData)

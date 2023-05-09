@@ -13,7 +13,7 @@ export class CredentialDefinitionService {
 
   async createCredDef( createCredDef : CreateCredentialDefinitionDto){
 
-    let url =  `${'http://192.168.43.184:9001'}${'/credential-definitions'}`
+    let url =  `${process.env.IP}:${process.env.ADMIN_PORT}${'/credential-definitions'}`
 
     let payload = {
         schema_id: createCredDef.schema_id,

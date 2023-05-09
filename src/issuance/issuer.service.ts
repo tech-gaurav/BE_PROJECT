@@ -27,8 +27,7 @@ export class IssueCredentialsService {
         //auto_remove: autoRemove,
     };
 
-
-    const url: string = `${'http://192.168.43.184:9001'}${'/issue-credential/send'}`;
+    const url: string = `${process.env.IP}:${process.env.ADMIN_PORT}${'/issue-credential/send'}`;
 
     try {
         return await this.httpService.post(url,issueData)
@@ -40,8 +39,28 @@ export class IssueCredentialsService {
         throw error
     }
     
+  }
 
 
+
+  async getCredentialRecords(connection_id:string){
+
+     console.log("Inside get credenial by conn id ::::")
+    let url: string = `${process.env.IP}:${process.env.ADMIN_PORT}${'/issue-credential/records'}`;
+
+    console.log("Url for get credential by connection Id :::::  ",url)
+
+    try{
+        return await this.httpService.get(url)
+        .pipe(
+            map(response=>response.data)
+        )
+    }
+    catch(error){
+        console.log(`error in get credential: ${error}`);
+        throw error
+    }
+          
   }
 
 
