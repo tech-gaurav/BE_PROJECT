@@ -16,6 +16,7 @@ import { RecieveInvitationDto} from '../dtos/recieve-invitation.dto'
      async createConnectionInvitation(
         @Body() connectionData
      ){
+         console.log("create conn inv called ......",connectionData);
          return this.connectionService.createConnectionInvitation(connectionData);
      }
 
@@ -25,6 +26,7 @@ import { RecieveInvitationDto} from '../dtos/recieve-invitation.dto'
      async(
          @Body() invitation
      ){
+         console.log("Body from controller ----",invitation)
          return this.connectionService.recieveConnectionInvitation(invitation);
      }
 

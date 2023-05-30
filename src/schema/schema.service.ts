@@ -11,18 +11,15 @@ export class SchemaService {
   ){
   }
 
-  async createSchema( schema : CreateSchemaDto){
+  async getSchemaById(schemaData:any ){
 
-    let url =  `${'http://192.168.43.184:9001'}${'/schemas'}`
-
-    const createSchema = new CreateSchemaDto();      // JSON to create schema for Cloud Agent
-            createSchema.schema_name = schema.schema_name;
-            createSchema.schema_version = schema.schema_version;
-            createSchema.attributes = schema.attributes;
-    console.log(" Create schema payload :::: ",createSchema)
+    let url =`${process.env.IP}:${schemaData.userPort}${'/schemas/'}${schemaData.schemaId}`
+    
+       
+  
 
     try{    
-              return await this.httpService.post(url,createSchema)
+              return await this.httpService.post(url)
               .pipe(
                 map(response=>response.data)
               )

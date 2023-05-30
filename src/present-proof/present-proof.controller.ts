@@ -7,15 +7,27 @@ export class PresetnProofController{
 
 constructor(
 private readonly presentProofService:PresentProofService
+
 ){}
 
-@Post('/')
+@Post('/send-proposal')
 @ApiTags('present-proof')
 presentProof(
-    @Body() {}
+    @Body() presentProofData
 ){
-    return this.presentProofService.presentProof()
+    return this.presentProofService.presentProof(presentProofData)
 
+}
+
+
+
+//get verificaction records
+@Post('/records')
+@ApiTags('present-proof')
+getPresentProofRecords(
+    @Body() getPresentProofData
+){
+    return this.presentProofService.getPresentProofRecords(getPresentProofData)
 }
 
 

@@ -12,13 +12,16 @@ import { ApiTags } from '@nestjs/swagger';
 
 
 
-     @Post('/create-schema')                ///////////    Create schema
+     
+
+     @Post('/')               
      @ApiTags('schema')
-     createCredentialDefinition(
-         @Body() schema : CreateSchemaDto
+     getSchemaById(
+         @Body() schemaData:any
      ){
-         return this.schemaService.createSchema(schema);
+         return this.schemaService.getSchemaById(schemaData);
      }
+
 
     
 

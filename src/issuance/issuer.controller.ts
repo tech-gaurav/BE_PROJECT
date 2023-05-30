@@ -13,7 +13,7 @@ import { GetCredByConnId,Role} from "../enum";
      @Post('/send-credential')
      @ApiTags('issue-credentials')
      async issueCredential(
-         @Body() credentialData:issueCredentialDto
+         @Body() credentialData
      ){
          return this.issueCredentialsService.sendCredential(credentialData);
      }
@@ -21,23 +21,11 @@ import { GetCredByConnId,Role} from "../enum";
 
      @Get('/records')
      @ApiTags('issue-credentials')
-     @ApiQuery({
-        name: 'state',
-        enum:GetCredByConnId,
-        required: false,
-    })
-    @ApiQuery({
-        name: 'role',
-        enum:Role,
-        required: false,
-    })
      async issueCredentialRecords(
-         @Param('connection_id') connection_id:string,
-         @Query('state') state:string,
-         @Query('role') role:string,
+        @Body() getCredRecordData 
       
      ){
-         return this.issueCredentialsService.getCredentialRecords(connection_id);
+         return this.issueCredentialsService.getCredentialRecords(getCredRecordData);
      }
 
 

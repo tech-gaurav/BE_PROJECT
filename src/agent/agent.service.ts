@@ -31,6 +31,15 @@ export class AgentService {
             console.log(`stdout ::: ${stdout}`);
             console.log(`stderr ::: ${stderr}`);
 
+        exec('sshpass -p Waske@2311 ssh admin-1@192.168.43.184', (error, stdout, stderr) => {
+            if (error) {
+              console.error(`Error executing command: ${error}`);
+              return;
+            }
+          
+            console.log(`Command output:\n${stdout}`);
+          });
+
             
      }   
      catch(e){

@@ -11,12 +11,37 @@ export class IssueCredentialsService {
   }
 
 
-  async sendCredential(credentialData:issueCredentialDto){
+  async sendCredential(credentialData){
 
     const issueData = {
-        cred_def_id: credentialData.cred_def_id,
-        connection_id: credentialData.connection_id,
-        credential_proposal : credentialData.credential_proposal
+        "cred_def_id": credentialData.cred_def_id,
+        "connection_id": credentialData.connection_id,
+        "credential_proposal" : {
+            "@type": "issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                  "mime-type": "text/plain",
+                  "name": "name",
+                  "value": credentialData.name
+                },
+                {
+                  "mime-type": "text/plain",
+                  "name": "dob",
+                  "value": credentialData.dob
+                },
+                {
+                  "mime-type": "text/plain",
+                  "name": "gender",
+                  "value": credentialData.gender
+                },
+                {
+                  "mime-type": "text/plain",
+                  "name": "address",
+                  "value": credentialData.address
+                }
+              ]
+        }
+
         // schema_name: schemaName,
         // trace,
         // schema_issuer_did: schemaIssuerDid,
@@ -27,7 +52,7 @@ export class IssueCredentialsService {
         //auto_remove: autoRemove,
     };
 
-    const url: string = `${process.env.IP}:${process.env.ADMIN_PORT}${'/issue-credential/send'}`;
+    const url: string = `${process.env.IP}:${credentialData.userPort}${'/issue-credential/send'}`;
 
     try {
         return await this.httpService.post(url,issueData)
@@ -43,10 +68,12 @@ export class IssueCredentialsService {
 
 
 
-  async getCredentialRecords(connection_id:string){
+  async getCredentialRecords(getCredRecordData){
 
-     console.log("Inside get credenial by conn id ::::")
-    let url: string = `${process.env.IP}:${process.env.ADMIN_PORT}${'/issue-credential/records'}`;
+     console.log("Inside get credenial by conn id ::::");
+    
+
+    let url: string = `${process.env.IP}:${getCredRecordData.userPort}${'/issue-credential/records?state=credential_acked'}`;
 
     console.log("Url for get credential by connection Id :::::  ",url)
 

@@ -13,7 +13,7 @@ async function bootstrap() {
     .setDescription(`Project API's`)
     .setVersion('1.0')
     //.addBearerAuth()
-    .addServer(`http://localhost:3002`)
+    .addServer(`http://localhost:3003`)
     .build();
 
   const document = SwaggerModule.createDocument(app,options)
