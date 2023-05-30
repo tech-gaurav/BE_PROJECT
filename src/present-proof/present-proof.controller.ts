@@ -3,32 +3,32 @@ import { ApiTags } from "@nestjs/swagger";
 import { PresentProofService } from "./present-proof.service";
 
 @Controller('present-proof')
-export class PresetnProofController{
+export class PresentProofController {
 
-constructor(
-private readonly presentProofService:PresentProofService
+    constructor(
+        private readonly presentProofService: PresentProofService
 
-){}
+    ) { }
 
-@Post('/send-proposal')
-@ApiTags('present-proof')
-presentProof(
-    @Body() presentProofData
-){
-    return this.presentProofService.presentProof(presentProofData)
+    @Post('/send-proposal')
+    @ApiTags('present-proof')
+    presentProof(
+        @Body() presentProofData
+    ) {
+        return this.presentProofService.presentProof(presentProofData)
 
-}
+    }
 
 
 
-//get verificaction records
-@Post('/records')
-@ApiTags('present-proof')
-getPresentProofRecords(
-    @Body() getPresentProofData
-){
-    return this.presentProofService.getPresentProofRecords(getPresentProofData)
-}
+    //get verificaction records
+    @Post('/records')
+    @ApiTags('present-proof')
+    getPresentProofRecords(
+        @Body() getPresentProofData
+    ) {
+        return this.presentProofService.getPresentProofRecords(getPresentProofData)
+    }
 
 
 }

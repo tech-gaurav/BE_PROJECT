@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { PresetnProofController } from "./present-proof.controller";
+import { PresentProofController } from "./present-proof.controller";
 import {HttpService} from '@nestjs/axios';
 import { map } from 'rxjs';
 
