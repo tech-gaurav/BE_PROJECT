@@ -12,6 +12,8 @@ import {IssueCredentialsService} from './issuance/issuer.service';
 import { AppService } from './app.service';
 import{AgentController} from './agent/agent.controller';
 import { AgentService } from "./agent/agent.service";
+import {PresetnProofController} from "./present-proof/present-proof.controller";
+import {PresentProofService} from "./present-proof/present-proof.service";
 
 
 import { HttpModule } from '@nestjs/axios';
@@ -20,7 +22,7 @@ import { HttpModule } from '@nestjs/axios';
        HttpModule
 
   ],
-  controllers: [AppController,ConnectionController,IssueCredentialsController,CredentialDefinitionController,SchemaController,AgentController],
-  providers: [AppService,ConnectionService,IssueCredentialsService,CredentialDefinitionService,SchemaService,AgentService],
+  controllers: [AppController,ConnectionController,IssueCredentialsController,CredentialDefinitionController,SchemaController,AgentController,PresetnProofController],
+  providers: [AppService,ConnectionService,IssueCredentialsService,CredentialDefinitionService,SchemaService,AgentService,PresentProofService],
 })
 export class AppModule {}
