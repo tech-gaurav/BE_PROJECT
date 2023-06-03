@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PresentProofController } from "./present-proof.controller";
 import {HttpService} from '@nestjs/axios';
 import { map } from 'rxjs';
+import { json } from "express";
 
 
 @Injectable()
@@ -14,11 +15,16 @@ export class PresentProofService{
 
 async presentProof(presentProofData){
 
+
+  console.log("presentproof data", presentProofData)
+
+  
+
     let proposalData={
          "comment": "proof",
          "auto_present":true,
          "trace":true,
-         "connection_id": presentProofData.connection_id,
+         "connection_id": presentProofData.connection_id[0].connection_id,
          "presentation_proposal":  {
             "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
             "attributes": [
@@ -55,11 +61,14 @@ async presentProof(presentProofData){
     }
 
 
+    let jsonData = JSON.stringify(proposalData)
+
+    console.log(jsonData);
 
     const url: string = `${process.env.IP}:${presentProofData.userPort}${'/present-proof/send-proposal'}`;
 
     try {
-        return await this.httpService.post(url,proposalData)
+        return await this.httpService.post(url,jsonData,{ headers: { 'Content-Type' : 'application/json' } })
         .pipe(
             map(response=>response.data)
         )
@@ -76,10 +85,13 @@ async presentProof(presentProofData){
 ///////////////////////////
  async getPresentProofRecords(getPresentProofData){
 
-    const url: string = `${process.env.IP}:${getPresentProofData.userPort}${'/present-proof/records?state=presentation_acked'}`;
+  console.log("Inside get present proof records",getPresentProofData)
+
+    const url: string = `${process.env.IP}:${getPresentProofData.userPort}${'/present-proof/records'}`;
+    console.log("url for presentation records",url)
 
     try {
-        return await this.httpService.post(url)
+        return await this.httpService.get(url)
         .pipe(
             map(response=>response.data)
         )

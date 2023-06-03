@@ -19,12 +19,13 @@ import { GetCredByConnId,Role} from "../enum";
      }
 
 
-     @Get('/records')
+     @Post('/get-cred-records')    //// for holder side
      @ApiTags('issue-credentials')
      async issueCredentialRecords(
         @Body() getCredRecordData 
       
      ){
+         console.log("inside send credential controller:::::",getCredRecordData)
          return this.issueCredentialsService.getCredentialRecords(getCredRecordData);
      }
 

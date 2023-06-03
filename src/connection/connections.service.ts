@@ -26,9 +26,9 @@ export class ConnectionService {
       //const platformOrgData = await this.organizationRepository.findOne({ id: 1 });
 
        console.log("create connection invitation call ....")
-       const auto_accept = false;
+       const auto_accept = true;
        //const _public = true;
-              const params: object = { auto_accept, multi_use: true };
+              const params: object = { auto_accept, multi_use: false };
               let url: string = `${process.env.IP}:${connectionData.data}${'/connections/create-invitation'}`;
               Object.keys(params).forEach((element) => {
                   //this.logger.debug(`params[element] : ${params[element]}`)

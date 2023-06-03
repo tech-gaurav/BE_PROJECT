@@ -13,7 +13,10 @@ export class IssueCredentialsService {
 
   async sendCredential(credentialData){
 
-    const issueData = {
+    console.log("Inside send cred ****", credentialData)
+
+    var issueData = {
+      // "schema_id":"MVR3rpvmBanZcUTGLYsLTy:2:aadhar:1.0",
         "cred_def_id": credentialData.cred_def_id,
         "connection_id": credentialData.connection_id,
         "credential_proposal" : {
@@ -42,6 +45,8 @@ export class IssueCredentialsService {
               ]
         }
 
+      
+
         // schema_name: schemaName,
         // trace,
         // schema_issuer_did: schemaIssuerDid,
@@ -52,10 +57,16 @@ export class IssueCredentialsService {
         //auto_remove: autoRemove,
     };
 
+    let jsonData = JSON.stringify(issueData)
+
+    console.log("Json Data ::::::   ",jsonData)
+
     const url: string = `${process.env.IP}:${credentialData.userPort}${'/issue-credential/send'}`;
 
+    console.log("url for send credentials ::: ",url)
+
     try {
-        return await this.httpService.post(url,issueData)
+        return await this.httpService.post(url,jsonData,{ headers: { 'Content-Type' : 'application/json' } })
         .pipe(
             map(response=>response.data)
         )
@@ -70,12 +81,13 @@ export class IssueCredentialsService {
 
   async getCredentialRecords(getCredRecordData){
 
-     console.log("Inside get credenial by conn id ::::");
+     console.log("Inside get credenial records ::::",getCredRecordData);
     
 
-    let url: string = `${process.env.IP}:${getCredRecordData.userPort}${'/issue-credential/records?state=credential_acked'}`;
+    //let url: string = `${process.env.IP}:${getCredRecordData.userPort}${'/issue-credential/records?state=credential_acked'}`;
+    let url: string = `${process.env.IP}:${getCredRecordData.userPort}${'/credentials'}`;
 
-    console.log("Url for get credential by connection Id :::::  ",url)
+    console.log("Url for get credential records :::::  ",url)
 
     try{
         return await this.httpService.get(url)
